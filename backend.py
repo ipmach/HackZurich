@@ -28,26 +28,12 @@ def webcam():
 def isAlive():
     return {"State": "200 server alive"}
 
-@app.route('/predict/')
-def prediction():
-    return l.return_data(["Pineapple", "Pepperoni"])
-
-""" Dynamic Data """
-import json
-
-with open('co2_sample.json') as json_file:
-    co2 = json.load(json_file)
-
-with open('ingredient_sample.json') as json_file:
-    ingredients = json.load(json_file)
-
-
-@app.route('/co2/<product>')  
+@app.route('/co2/<product>')
 def product_rating(product):
     #get from data base
-    return co2
+    return l.return_data_CO2(product)
 
-@app.route('/ingredients/<product>')  
+@app.route('/ingredients/<product>')
 def ingredient(product):
     #get from data base
-    return ingredients
+    return l.return_data_pizza(product)

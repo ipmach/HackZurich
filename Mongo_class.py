@@ -30,7 +30,9 @@ class Mongo_pizza():
         aux =  list(self.db.Ingredient.find({"name":ingredient_name}))
         if len(aux) == 0:
             print("ERROR: Ingredient not found")
-            self.pm.get_error("Error Mongo db, Ingredient not found ")
+            print(ingredient_name)
+            self.get_error("Error Mongo db, Ingredient not found "
+                           + ingredient_name)
             return None
         return aux[0]
 
@@ -42,22 +44,25 @@ class Mongo_pizza():
         aux =  list(self.db.Pizza.find({"name":pizza_name}))
         if len(aux) == 0:
             print("ERROR: Pizza not found")
-            self.pm.get_error("Error Mongo db, Pizza not found ")
+            print(pizza_name)
+            self.get_error("Error Mongo db, Pizza not found "
+                           + pizza_name)
             return None
         return aux[0]
 
 
-    def insert_log(self, pizza_name, ingredients, co2, user, kitchen, co2=True):
+    def insert_log(self, pizza_name, ingredients, co2, user, kitchen, action):
         """
         Historical record from the query CO2
         """
         time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        log = {"Data": time, "Pizza": pizza_name, "co2": co2,
-               "user": user, "Kitchen": kitchen}
-        for ingredient in ingredients:
-            name = ingredient["names"][0]['value']
-            amount = ingredient["amount"]
-            log[name] = amount
+        if co2 > -1:
+            log = {"Data": time, "Pizza": pizza_name, "co2": co2,
+                   "user": user, "Kitchen": kitchen, "action": action}
+        else:
+            log = {"Data": time, "Pizza": pizza_name,
+                   "user": user, "Kitchen": kitchen,
+                   "ingredients": ingredients , "action": action}
         self.db.Stats.insert_one(log)
 
     def get_error(self, error):

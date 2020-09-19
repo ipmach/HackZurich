@@ -57,15 +57,17 @@ class Logic():
         return aux
     """
 
-    def return_data_CO2(self, ingredients, location="Switzerland"):
+    def return_data_CO2(self, pizza_name, location="Switzerland"):
+        self.ec.create_kitchen(self.user, self.kitchen, location)
+        ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
         aux_ingr = [self.pm.get_ingredient(i) for i in ingredients]
         aux = [self.conver_ingredient(i,[]) for i in aux_ingr]
         aux = self.ec.put_recipe("Recipe", self.kitchen,
                                  "Recipe", aux, location)
-        self.pm.insert_log("Recipe",
-                           aux['recipe']['ingredients'],
+        self.pm.insert_log(pizza_name,
+                           ingredients,
                            aux['recipe']['co2-value'],
-                           self.user, self.kitchen)
+                           self.user, self.kitchen, "Return co2")
         return aux
 
     def return_data_pizza(self, pizza_name, location="Switzerland"):
@@ -75,4 +77,8 @@ class Logic():
         """
         self.ec.create_kitchen(self.user, self.kitchen, location)
         ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
+        self.pm.insert_log(pizza_name,
+                           ingredients,
+                           -1,
+                           self.user, self.kitchen, "Return ingredients")
         return {"ingredients": ingredients}
