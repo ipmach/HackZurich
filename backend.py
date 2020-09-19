@@ -32,3 +32,7 @@ def isAlive():
 def prediction():
     return l.return_data(["Pineapple", "Pepperoni"])
 
+""" @app.route('/predict/<id>')  
+def landing_page(id):
+    #get from data base
+    return database[id] """
