@@ -1,0 +1,86 @@
+{
+    "message": "",
+    "recipe": {
+      "co2-value": 995,
+      "date": "2020-09-19",
+      "eaternity-award": false,
+      "food-unit": 0.9558463636363635,
+      "id": "Hawaiian pizza",
+      "ingredients": [
+        {
+          "amount": 75,
+          "conservation": "fresh",
+          "id": "13",
+          "names": [
+            {
+              "language": "en",
+              "value": "Pineapple"
+            }
+          ],
+          "origin": "Germany",
+          "production": "standard",
+          "transport": "ground",
+          "unit": "gram"
+        },
+        {
+          "amount": 75,
+          "conservation": "fresh",
+          "id": "12",
+          "names": [
+            {
+              "language": "en",
+              "value": "Corn"
+            }
+          ],
+          "origin": "Germany",
+          "production": "standard",
+          "transport": "ground",
+          "unit": "gram"
+        },
+        {
+          "amount": 75,
+          "conservation": "fresh",
+          "id": "15",
+          "names": [
+            {
+              "language": "en",
+              "value": "Mozzarella"
+            }
+          ],
+          "origin": "Germany",
+          "production": "standard",
+          "transport": "ground",
+          "unit": "gram"
+        },
+        {
+          "amount": 75,
+          "conservation": "fresh",
+          "id": "14",
+          "names": [
+            {
+              "language": "en",
+              "value": "Tomato sauce"
+            }
+          ],
+          "origin": "Germany",
+          "production": "standard",
+          "transport": "ground",
+          "unit": "gram"
+        }
+      ],
+      "kitchen-id": "Kitchen_Peter",
+      "location": "Schweiz",
+      "rating": "B",
+      "recipe-portions": 1,
+      "servings": 1,
+      "titles": [
+        {
+          "language": "en",
+          "value": "Hawaiian pizza"
+        }
+      ]
+    },
+    "recipe-id": "Hawaiian pizza",
+    "request-id": 0,
+    "statuscode": 200
+  }
