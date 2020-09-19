@@ -31,9 +31,22 @@ def isAlive():
 @app.route('/co2/<product>')
 def product_rating(product):
     #get from data base
+    print(l.return_data_CO2(product))
     return l.return_data_CO2(product)
 
 @app.route('/ingredients/<product>')
 def ingredient(product):
     #get from data base
+    print(l.return_data_pizza(product))
+
+    return l.return_data_pizza(product)
+
+
+
+""" Back up functions in case Migros/ IBM fails """
+
+@app.route('/offline_ingredients/<product>')
+def ingredient_off(product):
+    #get from data base
+
     return l.return_data_pizza(product)

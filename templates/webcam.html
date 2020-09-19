@@ -139,6 +139,38 @@
             return maxIndex;
         }
 
+        function getProductIngredients(product){
+    /* Type is = ingredients or co2 */
+    url = "http://localhost:5000/"+ "ingredients" +"/"+ product
+    var response
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText)
+        }
+    };
+    xhttp.open("GET", url , true);
+    xhttp.send();
+    console.log(response)
+    return response
+}
+
+function getProductCO2(product){
+    /* Type is = ingredients or co2 */
+    url = "http://localhost:5000/"+ "co2" +"/"+ product
+    var response
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText)
+        }
+    };
+    xhttp.open("GET", url , true);
+    xhttp.send();
+    console.log(response)
+    return response.recipe.rating
+}
+
 
         let snap = document.getElementById('snap')
         snap.addEventListener("click", function(){
@@ -148,7 +180,10 @@
             } 
             index= indexOfMax(capture_list)
             pizza_name= capture_prediction[index].className
-            console.log(pizza_name)
+    
+
+            /* var rating = getProductInfo(pizza_name, 'co2') */
+            var ingredients = getProductIngredients(pizza_name)
             /* webcam.stop(); */
             //video.src = "";
             //window.stream.getTracks()[0].stop();
