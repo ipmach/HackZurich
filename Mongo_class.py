@@ -47,9 +47,9 @@ class Mongo_pizza():
         return aux[0]
 
 
-    def insert_log(self, pizza_name, ingredients, co2, user, kitchen):
+    def insert_log(self, pizza_name, ingredients, co2, user, kitchen, co2=True):
         """
-        Historical record from the query
+        Historical record from the query CO2
         """
         time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         log = {"Data": time, "Pizza": pizza_name, "co2": co2,
