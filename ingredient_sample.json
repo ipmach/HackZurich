@@ -1,3 +1,4 @@
-/* Request is "Margheritta" */
-{"ingredients": ["Mozzarella", "Tomato Sauce", "Dough", "Pineapple"]
+
+{"ingredients": ["Mozzarella", "Tomato Sauce", "Dough", "Pineapple"],
+    "comment": "Request is Margheritta"
 }

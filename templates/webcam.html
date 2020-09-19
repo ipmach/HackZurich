@@ -102,13 +102,17 @@
             await predict();
             window.requestAnimationFrame(loop);
         }
-    
+        
+
+       
+        var capture_prediction
         // run the webcam image through the image model
         async function predict() {
             // predict can take in an image, video or canvas html element
             const prediction = await model.predict(webcam.canvas);
             let loader = document.getElementById('loader');
             loader.style.display='none';
+            capture_prediction = prediction
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
@@ -116,6 +120,74 @@
             }
         }
         init()
+
+        function indexOfMax(arr) {
+            if (arr.length === 0) {
+                return -1;
+            }
+
+            var max = arr[0];
+            var maxIndex = 0;
+
+            for (var i = 1; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    maxIndex = i;
+                    max = arr[i];
+                }
+            }
+
+            return maxIndex;
+        }
+
+        function getProductIngredients(product){
+    /* Type is = ingredients or co2 */
+    url = "http://localhost:5000/"+ "ingredients" +"/"+ product
+    var response
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText)
+        }
+    };
+    xhttp.open("GET", url , true);
+    xhttp.send();
+    console.log(response)
+    return response
+}
+
+function getProductCO2(product){
+    /* Type is = ingredients or co2 */
+    url = "http://localhost:5000/"+ "co2" +"/"+ product
+    var response
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText)
+        }
+    };
+    xhttp.open("GET", url , true);
+    xhttp.send();
+    console.log(response)
+    return response.recipe.rating
+}
+
+
+        let snap = document.getElementById('snap')
+        snap.addEventListener("click", function(){
+            var capture_list= []
+            for (let i = 0; i < maxPredictions; i++){
+                capture_list.push(capture_prediction[i].probability)
+            } 
+            index= indexOfMax(capture_list)
+            pizza_name= capture_prediction[index].className
+    
+
+            /* var rating = getProductInfo(pizza_name, 'co2') */
+            var ingredients = getProductIngredients(pizza_name)
+            /* webcam.stop(); */
+            //video.src = "";
+            //window.stream.getTracks()[0].stop();
+        });
     </script>
     
 </body>
