@@ -1,0 +1,33 @@
+{
+  "Broccoli pizza": {
+      "id": "1",
+      "name": "Broccoli pizza",
+      "Key_ingredients": ["Broccoli"]
+    },
+  "Hawaiian pizza": {
+      "id": "2",
+      "name": "Hawaiian pizza",
+      "Key_ingredients": ["Pineapple", "Corn"]
+  },
+  "Pizza pepperoni": {
+      "id": "3",
+      "name": "Pizza pepperoni",
+      "Key_ingredients": ["Pepperoni"]
+  },
+  "Pizza capricciosa": {
+      "id": "4",
+      "name": "Pizza capricciosa",
+      "Key_ingredients": ["Olives"]
+  },
+  "Pizza Funghi": {
+      "id": "5",
+      "name": "Pizza Funghi",
+      "Key_ingredients": ["Mushrooms"]
+  },
+  "Margarita": {
+      "id": "6",
+      "name": "Margarita",
+      "Key_ingredients": []
+  }
+
+}

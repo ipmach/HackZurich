@@ -1,0 +1,138 @@
+{
+  "Pepperoni": {
+      "id": "1",
+      "names": "Pepperoni",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Bacon": {
+      "id": "2",
+      "names": "Bacon",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Mushrooms": {
+      "id": "3",
+      "names": "Mushrooms",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Onions": {
+      "id": "4",
+      "names": "Onions",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Peppers": {
+      "id": "5",
+      "names": "Peppers",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Black olives": {
+      "id": "6",
+      "names": "Mushrooms",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Tomatoes": {
+      "id": "7",
+      "names": "Tomatoes",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Spinach": {
+      "id": "8",
+      "names": "Spinach",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Fresh basil": {
+      "id": "9",
+      "names": "Fresh basil",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Arugula": {
+      "id": "10",
+      "names": "Arugula",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Spinach": {
+      "id": "11",
+      "names": "Spinach",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Broccoli": {
+      "id": "12",
+      "names": "Broccoli",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Corn": {
+      "id": "13",
+      "names": "Corn",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Pineapple": {
+      "id": "14",
+      "names": "Pineapple",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Tomato sauce": {
+      "id": "15",
+      "names": "Tomato sauce",
+      "production": "standard",
+      "conservation": "can",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Cheese": {
+      "id": "16",
+      "names": "Cheese",
+      "production": "standard",
+      "conservation": "fresh",
+      "amount": 75,
+      "unit": "gram"
+  },
+  "Bread": {
+      "id": "17",
+      "names": "Pizza doll",
+      "production": "standard",
+      "conservation": "frozen",
+      "amount": 75,
+      "unit": "gram"
+  }
+}
