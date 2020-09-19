@@ -15,10 +15,9 @@ class MigrosAPI():
             'accept-language': 'de',
         }
         
-
     def get_nutritients(self, ingredient_name):
         """
-        Nutritional facts
+        Retrieve nutritional facts
             ingredient_name: name of the ingredient
         """
         params = (
@@ -43,6 +42,60 @@ class MigrosAPI():
         
         # just take first product
         return response['products'][0]['nutrition_facts']
+
+    def get_location(self, ingredient_name):
+        """
+        Retrieve location of ingredient
+            ingredient_name: name of the ingredient
+        """
+        params = (
+            ('search', ingredient_name),
+            ('limit', '10'),
+            ('offset', '0'),
+            ('facet_sort_order', 'asc'),
+            ('sort', 'score'),
+            ('order', 'asc'),
+            ('region', 'national'),
+            ('view', 'browse'),
+            ('verbosity', 'full'),
+            ('custom_image', 'false'),
+        )
+        response = requests.get(self.api, 
+            headers=self.headers, params=params, 
+            auth=(self.user, self.password))
+
+        response = response.json()
+
+        # just take first product
+        return response['products'][0]['origins']['producing_country']
+
+    def get_price(self, ingredient_name):
+        """
+        Retrieve price of ingredient
+            ingredient_name: name of the ingredient
+        """
+        params = (
+            ('search', ingredient_name),
+            ('limit', '10'),
+            ('offset', '0'),
+            ('facet_sort_order', 'asc'),
+            ('sort', 'score'),
+            ('order', 'asc'),
+            ('region', 'national'),
+            ('view', 'browse'),
+            ('verbosity', 'full'),
+            ('custom_image', 'false'),
+        )
+        response = requests.get(self.api, 
+            headers=self.headers, params=params, 
+            auth=(self.user, self.password))
+
+        response = response.json()
+
+        # just take first product
+        return response['products'][0]['price']
+
+
 
 """
 # function that maps from ingredient to location where it is from -> input for IBM CO2 database
