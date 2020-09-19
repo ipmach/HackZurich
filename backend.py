@@ -50,3 +50,6 @@ def ingredient_off(product):
     #get from data base
 
     return l.return_data_pizza(product)
+
+if __name__ == '__main__':
+    app.run(debug=True)
