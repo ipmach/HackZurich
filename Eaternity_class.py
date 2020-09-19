@@ -1,6 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
-
+from datetime import datetime
 
 class Eaternity_class():
 
@@ -40,6 +40,7 @@ class Eaternity_class():
             kitchen_id: kitchen id
             name_pizza: pizza id
             list_ingredientes: list of ingredients
+            location: location of kitchens
         """
         url = "{}/api/kitchens/{}/recipes/{}".format(self.BASE_URL,
                                                      kitchen_id, recipe_id)
@@ -52,7 +53,7 @@ class Eaternity_class():
                         "value": name_pizza
                     }
                 ],
-                "date": "2020-09-19",
+                "date": datetime.now().strftime("%d-%m-%Y"),
                 "location": location,
                 "servings": 1,
                 "ingredients": list_ingredientes
