@@ -30,7 +30,7 @@ class Mongo_pizza():
         aux =  list(self.db.Ingredient.find({"name":ingredient_name}))
         if len(aux) == 0:
             print("ERROR: Ingredient not found")
-            self.pm.get_error("Error Mongo db, Ingredient not found ")
+            self.get_error("Error Mongo db, Ingredient not found ")
             return None
         return aux[0]
 
@@ -42,12 +42,12 @@ class Mongo_pizza():
         aux =  list(self.db.Pizza.find({"name":pizza_name}))
         if len(aux) == 0:
             print("ERROR: Pizza not found")
-            self.pm.get_error("Error Mongo db, Pizza not found ")
+            self.get_error("Error Mongo db, Pizza not found ")
             return None
         return aux[0]
 
 
-    def insert_log(self, pizza_name, ingredients, co2, user, kitchen, co2=True):
+    def insert_log(self, pizza_name, ingredients, co2, user, kitchen):
         """
         Historical record from the query CO2
         """

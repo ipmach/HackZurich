@@ -46,7 +46,7 @@ class Logic():
                            self.user, self.kitchen)
         for i in tqdm(aux_ingr):
             try:
-                aux[i['name'] + " Nutritional"] = self.ma.get_nutritients(
+                aux[i['name'] + " Nutritional"] = self.ma.get_nutrients(
                                                   i['name-ger'])
             except IndexError as e:
                 aux[i['name'] + " Nutritional"] = "None"
@@ -76,3 +76,23 @@ class Logic():
         self.ec.create_kitchen(self.user, self.kitchen, location)
         ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
         return {"ingredients": ingredients}
+
+    def return_nutrients_ingredients(self, ingredient):
+        """
+        Return data
+            ingredients: list data
+        """
+        aux_ingr = self.pm.get_ingredient(ingredient)
+        print(aux_ingr)
+        aux = {}
+        try:
+            aux[aux_ingr['name'] + " Nutritional"] = self.ma.get_nutrients(
+                                              aux_ingr['name-ger'])
+        except IndexError as e:
+            aux[aux_ingr['name'] + " Nutritional"] = "None"
+            self.pm.get_error("Error Migros API: " + str(e))
+        except  KeyError as e:
+            aux[aux_ingr['name'] + " Nutritional"] = "None"
+            self.pm.get_error("Error Migros API: " + str(e))
+        return aux
+

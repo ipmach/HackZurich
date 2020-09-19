@@ -19,7 +19,7 @@ class MigrosAPI():
             'accept-language': 'de',
         }
         
-    def get_nutritients(self, ingredient_name):
+    def get_nutrients(self, ingredient_name):
         """
         Retrieve nutritional facts
             ingredient_name: name of the ingredient
@@ -40,11 +40,13 @@ class MigrosAPI():
         response = requests.get(self.api, 
             headers=self.headers, params=params, 
             auth=(self.user, self.password))
-
         response = response.json()
+
+        # find matching product and return corresponding nutrients
         matching_product = self.get_best_fit(response, ingredient_name)
+        nutrients = self.beautify_nutrients(matching_product['nutrition_facts'])
         
-        return matching_product['nutrition_facts']
+        return nutrients
 
     def get_location(self, ingredient_name):
         """
@@ -150,6 +152,30 @@ class MigrosAPI():
 
         # Strip scores for the best n matches
         return [x for score, x in result]
+
+
+    def beautify_nutrients(self, nutrition_facts):
+        """
+        Brings the nutritional facts of the product to desired form
+            nutritional_facts: JSON of the nutrients
+        """
+        # set up first column
+        nutrition_facts = nutrition_facts['standard']
+
+        nutrients = {}
+        nutrients['Quantity'] = [nutrition_facts['base_quantity'], 
+                                nutrition_facts['base_unit']]
+
+        # loop over all columns in nutrition_facts and build dict
+        for i in range(len(nutrition_facts['nutrients'])):
+            nutrients[nutrition_facts['nutrients'][i]['name']] = [
+                    nutrition_facts['nutrients'][i]['quantity'],
+                    nutrition_facts['nutrients'][i]['quantity_unit'],
+
+                ]
+
+        return nutrients
+
 
 
 
