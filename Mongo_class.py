@@ -1,5 +1,5 @@
 import pymongo
-
+import datetime
 
 class Mongo_pizza():
 
@@ -30,6 +30,7 @@ class Mongo_pizza():
         aux =  list(self.db.Ingredient.find({"name":ingredient_name}))
         if len(aux) == 0:
             print("ERROR: Ingredient not found")
+            self.pm.get_error("Error Mongo db, Ingredient not found ")
             return None
         return aux[0]
 
@@ -41,14 +42,29 @@ class Mongo_pizza():
         aux =  list(self.db.Pizza.find({"name":pizza_name}))
         if len(aux) == 0:
             print("ERROR: Pizza not found")
+            self.pm.get_error("Error Mongo db, Pizza not found ")
             return None
         return aux[0]
 
 
-    def insert_log(self, pizza_name, ingredients, co2):
-        log = {"Pizza": pizza_name, "co2": co2}
+    def insert_log(self, pizza_name, ingredients, co2, user, kitchen, co2=True):
+        """
+        Historical record from the query CO2
+        """
+        time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        log = {"Data": time, "Pizza": pizza_name, "co2": co2,
+               "user": user, "Kitchen": kitchen}
         for ingredient in ingredients:
             name = ingredient["names"][0]['value']
             amount = ingredient["amount"]
             log[name] = amount
         self.db.Stats.insert_one(log)
+
+    def get_error(self, error):
+        """
+        Historiacal record from the erros
+        """
+        print("Recording Error")
+        time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        log = {"Data": time, "Error": error}
+        self.db.Error_log.insert_one(log)
