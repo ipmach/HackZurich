@@ -13,4 +13,4 @@ def isAlive():
 
 @app.route('/predict/')
 def prediction():
-    return l.return_data(["Pineapple", "Pepperoni"])
+    return l.return_data_ingredients(["Pineapple", "Pepperoni"])
