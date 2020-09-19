@@ -1,5 +1,7 @@
 import pymongo
 import datetime
+import ssl
+
 
 class Mongo_pizza():
 
@@ -7,7 +9,8 @@ class Mongo_pizza():
         client = pymongo.MongoClient(
                 "mongodb+srv://" + user + ":" + pwd +
                 "@cluster0.x2yjr.gcp.mongodb.net/" + table +
-                "?retryWrites=true&w=majority")
+                "?retryWrites=true&w=majority",
+                ssl_cert_reqs=ssl.CERT_NONE)
         self.db = client.Pizza_db
 
     def classify_pizza(self, ingredients):
