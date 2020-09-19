@@ -1,4 +1,5 @@
 pymongo
 flask
 requests
-tqmd
+tqdm
+'mongo[srv]' dnspython
