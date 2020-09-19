@@ -28,42 +28,23 @@ class Logic():
                 "production": mongo_dict['production'],
                 "conservation":mongo_dict['conservation']
         }
-    """
-    def return_data_ingredients(self, ingredients, location="Switzerland"):
-
-        Return data
-            ingredients: list data
-
-        self.ec.create_kitchen(self.user, self.kitchen, location)
-        aux_ingr = [self.pm.get_ingredient(i) for i in ingredients]
-        aux = [self.conver_ingredient(i,[]) for i in aux_ingr]
-        pizza_name = self.pm.classify_pizza(ingredients)
-        aux = self.ec.put_recipe(pizza_name, self.kitchen,
-                                 pizza_name, aux, location)
-        self.pm.insert_log(pizza_name,
-                           aux['recipe']['ingredients'],
-                           aux['recipe']['co2-value'],
-                           self.user, self.kitchen)
-        for i in tqdm(aux_ingr):
-            try:
-                aux[i['name'] + " Nutritional"] = self.ma.get_nutritients(
-                                                  i['name-ger'])
-            except IndexError as e:
-                aux[i['name'] + " Nutritional"] = "None"
-                self.pm.get_error("Error Migros API: " + str(e))
-            except  KeyError as e:
-                aux[i['name'] + " Nutritional"] = "None"
-                self.pm.get_error("Error Migros API: " + str(e))
-        return aux
-    """
 
     def return_data_CO2(self, pizza_name, location="Switzerland"):
-        self.ec.create_kitchen(self.user, self.kitchen, location)
+        """
+        Return CO2 data
+            pizza_name: string data
+        """
+        a = self.ec.create_kitchen(self.user, self.kitchen, location)
+        if a[1]:
+            self.pm.get_error(a[0])
         ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
         aux_ingr = [self.pm.get_ingredient(i) for i in ingredients]
         aux = [self.conver_ingredient(i,[]) for i in aux_ingr]
-        aux = self.ec.put_recipe("Recipe", self.kitchen,
+        aux, a = self.ec.put_recipe("Recipe", self.kitchen,
                                  "Recipe", aux, location)
+        if a:
+            self.pm.get_error(aux)
+            raise Exception
         self.pm.insert_log(pizza_name,
                            ingredients,
                            aux['recipe']['co2-value'],
@@ -72,7 +53,7 @@ class Logic():
 
     def return_data_pizza(self, pizza_name, location="Switzerland"):
         """
-        Return data
+        Return ingredients from pizza
             pizza_name: string data
         """
         self.ec.create_kitchen(self.user, self.kitchen, location)

@@ -26,11 +26,13 @@ class Eaternity_class():
 
         response = requests.put(url, json=body, auth=self.AUTH)
         if response.status_code not in [200, 201, 202]:
-            print(f"ERROR: Failed PUTting kitchen {kitchen_id}" +
-                  f" with status {response.status_code}: '{response.text}'")
+            error_msg = f"ERROR: Failed PUTting kitchen {kitchen_id}" + \
+                  f" with status {response.status_code}: '{response.text}'"
+            print(error_msg)
+            return error_msg, True
         else:
             print(f"SUCCESS: PUT kitchen {kitchen_id}")
-            return response.json()
+            return response.json(), False
 
     def put_recipe(self, recipe_id, kitchen_id,
                    name_pizza, list_ingredientes, location):
@@ -61,10 +63,12 @@ class Eaternity_class():
         }
         response = requests.put(url, json=body, auth=self.AUTH)
         if response.status_code not in [200, 201, 202]:
-            print(f"ERROR: Failed PUTting recipe {recipe_id} with" +
-                  f" status {response.status_code}: '{response.text}'")
+            error_msg = f"ERROR: Failed PUTting recipe {recipe_id} with" + \
+                        f" status {response.status_code}: '{response.text}'"
+            print(error_msg)
+            return error_msg, True
         else:
             print(f"SUCCESS: PUT recipe {recipe_id}")
             response = response.json()
             response['recipe']['ingredients'] = list_ingredientes
-            return response
+            return response, False
