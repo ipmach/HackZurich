@@ -27,7 +27,8 @@ class Mongo_pizza():
         Get ingredient element by name
             ingredient_name: string
         """
-        aux =  list(self.db.Ingredient.find({"names":ingredient_name}))
+        print(ingredient_name)
+        aux =  list(self.db.Ingredient.find({"name":ingredient_name}))
         if len(aux) == 0:
             print("ERROR: Ingredient not found")
             return None
