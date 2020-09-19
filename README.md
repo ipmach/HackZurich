@@ -7,7 +7,7 @@ Lets hack some pizzasss
 - pip install requests
 - python -m pip install 'mongo[srv]' dnspython
 - pip install pymongo
-- pip install tqmd
+- pip install tqdm
 
 # Run the backend
 

@@ -29,7 +29,7 @@ class Logic():
                 "conservation":mongo_dict['conservation']
         }
 
-    def return_data(self, ingredients, location="Switzerland"):
+    def return_data_ingredients(self, ingredients, location="Switzerland"):
         """
         Return data
             ingredients: list data
@@ -40,10 +40,33 @@ class Logic():
         pizza_name = self.pm.classify_pizza(ingredients)
         aux = self.ec.put_recipe(pizza_name, self.kitchen,
                                  pizza_name, aux, location)
+        self.pm.insert_log(pizza_name,
+                           aux['recipe']['ingredients'],
+                           aux['recipe']['co2-value'])
         for i in tqdm(ingredients):
             try:
                 aux[i + " Nutritional"] = self.ma.get_nutritients(i)
             except IndexError:
                 aux[i + " Nutritional"] = "None"
+        return aux
 
+    def return_data_pizza(self, pizza_name, location="Switzerland"):
+        """
+        Return data
+            pizza_name: string data
+        """
+        self.ec.create_kitchen(self.user, self.kitchen, location)
+        ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
+        aux = [self.pm.get_ingredient(i) for i in ingredients]
+        aux = [self.conver_ingredient(i,[]) for i in aux]
+        aux = self.ec.put_recipe(pizza_name, self.kitchen,
+                                 pizza_name, aux, location)
+        self.pm.insert_log(pizza_name,
+                           aux['recipe']['ingredients'],
+                           aux['recipe']['co2-value'])
+        for i in tqdm(ingredients):
+            try:
+                aux[i + " Nutritional"] = self.ma.get_nutritients(i)
+            except IndexError:
+                aux[i + " Nutritional"] = "None"
         return aux
