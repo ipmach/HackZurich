@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="/static/images/favicon.png" type="image/png">
+	<title>Food Bar</title>
+	<!-- main css -->
+	<link rel="stylesheet" href="/static/ss/style_result.css">
+	<!--<link rel="stylesheet" href="css/responsive.css">-->
+</head>
+
+<body>
+
+    <h1 class="head1"> Nutrition Content </h1>
+
+    {% for i in nutriention%}
+    <div class="nut">
+        <div class="box">
+            <div class="percent">
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number">
+                    <h2>87<span>%</span></h2>
+                </div>
+            </div>
+            <h2 class="text">{{i}}</h2>
+        </div>
+
+    <div class="bg_modal">
+        <div class="modal_content">
+            <h2>
+                {{i}}
+            </h2>
+            <br><br>
+            <h5>CO2</h5>
+            <br><br>
+            <h5>Nutrition</h5>
+            <button id="btn" class="main_btn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('three').addEventListener('click', function(){
+            document.querySelector('.bg_modal').style.display = 'flex';
+        })
+
+        document.getElementById('btn').addEventListener('click', function(){
+            document.querySelector('.bg_modal').style.display = 'none';
+        })
+    </script>
+
+    {% endfor %}
+</body>
+</html>
