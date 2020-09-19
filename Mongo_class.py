@@ -27,9 +27,28 @@ class Mongo_pizza():
         Get ingredient element by name
             ingredient_name: string
         """
-        print(ingredient_name)
         aux =  list(self.db.Ingredient.find({"name":ingredient_name}))
         if len(aux) == 0:
             print("ERROR: Ingredient not found")
             return None
         return aux[0]
+
+    def get_pizza(self, pizza_name):
+        """
+        Get ingredient element by name
+            ingredient_name: string
+        """
+        aux =  list(self.db.Pizza.find({"name":pizza_name}))
+        if len(aux) == 0:
+            print("ERROR: Pizza not found")
+            return None
+        return aux[0]
+
+
+    def insert_log(self, pizza_name, ingredients, co2):
+        log = {"Pizza": pizza_name, "co2": co2}
+        for ingredient in ingredients:
+            name = ingredient["names"][0]['value']
+            amount = ingredient["amount"]
+            log[name] = amount
+        self.db.Stats.insert_one(log)
