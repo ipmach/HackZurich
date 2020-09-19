@@ -58,11 +58,12 @@ class Mongo_pizza():
         time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         if co2 > -1:
             log = {"Data": time, "Pizza": pizza_name, "co2": co2,
-                   "user": user, "Kitchen": kitchen, "action": action}
+                   "user": user, "Kitchen": kitchen,
+                   "ingredients": ingredients, "action": action}
         else:
             log = {"Data": time, "Pizza": pizza_name,
                    "user": user, "Kitchen": kitchen,
-                   "ingredients": ingredients , "action": action}
+                   "ingredients": ingredients, "action": action}
         self.db.Stats.insert_one(log)
 
     def get_error(self, error):
