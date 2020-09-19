@@ -41,7 +41,9 @@ def ingredient(product):
 
     return l.return_data_pizza(product)
 
-
+@app.route('/nutrients/<product>')
+def getNutrients(product):
+    return l.return_nutrients_ingredients(product)
 
 """ Back up functions in case Migros/ IBM fails """
 
