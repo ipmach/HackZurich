@@ -20,7 +20,7 @@ class Logic():
         """
         return {
                 "id": mongo_dict['id'],
-                "names": [{"language": "en", "value":mongo_dict['names']}],
+                "names": [{"language": "en", "value": mongo_dict['name']}],
                 "amount": mongo_dict['amount'],
                 "unit": mongo_dict['unit'],
                 "origin": "Germany",
