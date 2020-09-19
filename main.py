@@ -42,13 +42,18 @@ class Logic():
                                  pizza_name, aux, location)
         self.pm.insert_log(pizza_name,
                            aux['recipe']['ingredients'],
-                           aux['recipe']['co2-value'])
+                           aux['recipe']['co2-value'],
+                           self.user, self.kitchen)
         for i in tqdm(aux_ingr):
             try:
                 aux[i['name'] + " Nutritional"] = self.ma.get_nutritients(
                                                   i['name-ger'])
-            except IndexError:
+            except IndexError as e:
                 aux[i['name'] + " Nutritional"] = "None"
+                self.pm.get_error("Error Migros API: " + str(e))
+            except  KeyError as e:
+                aux[i['name'] + " Nutritional"] = "None"
+                self.pm.get_error("Error Migros API: " + str(e))
         return aux
 
     def return_data_pizza(self, pizza_name, location="Switzerland"):
@@ -58,17 +63,22 @@ class Logic():
         """
         self.ec.create_kitchen(self.user, self.kitchen, location)
         ingredients = self.pm.get_pizza(pizza_name)['Ingredients']
-        aux = [self.pm.get_ingredient(i) for i in ingredients]
-        aux = [self.conver_ingredient(i,[]) for i in aux]
+        aux_ingr = [self.pm.get_ingredient(i) for i in ingredients]
+        aux = [self.conver_ingredient(i,[]) for i in aux_ingr]
         aux = self.ec.put_recipe(pizza_name, self.kitchen,
                                  pizza_name, aux, location)
         self.pm.insert_log(pizza_name,
                            aux['recipe']['ingredients'],
-                           aux['recipe']['co2-value'])
-        for i in tqdm(ingredients):
+                           aux['recipe']['co2-value'],
+                           self.user, self.kitchen)
+        for i in tqdm(aux_ingr):
             try:
-                aux[i + " Nutritional"] = self.ma.get_nutritients(
-                                          i['name-ger'])
-            except IndexError:
-                aux[i + " Nutritional"] = "None"
+                aux[i['name'] + " Nutritional"] = self.ma.get_nutritients(
+                                                  i['name-ger'])
+            except IndexError as e:
+                aux[i['name'] + " Nutritional"] = "None"
+                self.pm.get_error("Error Migros API: " + str(e))
+            except  KeyError as e:
+                aux[i['name'] + " Nutritional"] = "None"
+                self.pm.get_error("Error Migros API: " + str(e))
         return aux
