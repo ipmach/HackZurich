@@ -4,7 +4,7 @@ Lets hack some pizzasss
 
 # Dependencies
 
-- pip install request
+- pip install requests
 - python -m pip install 'mongo[srv]' dnspython
 - pip install pymongo
 - pip install tqmd

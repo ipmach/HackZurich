@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="/static/images/favicon.png" type="image/png">
+	<title>Food Bar</title>
+	<!-- main css -->
+	<link rel="stylesheet" href="/static/css/style_try_web.css">
+	<!--<link rel="stylesheet" href="css/responsive.css">-->
+</head>
+
+<body>
+    
+    <!--================ Start Video section =================-->
+    <section>
+        <div class="video">
+            <video id="video" playsinline autoplay></video>
+            
+        </div>
+
+        <!-- Canva Web API -->
+
+        <div class= "controller" style="display: flex;
+        align-items: center;
+        justify-content: center; margin-top: 3%;">
+            <button id = "snap" class="main_btn">Capture</button>
+        </div>
+
+        <canvas id = "canvas" width = "485" height = "273"></canvas>
+
+    </section>
+
+    <!-- Java Script -->
+    <script>
+        'use strict';
+        console.log("Here");
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const snap = document.getElementById('snap');
+        const error_msg = document.getElementById('span#ErrorMsg');
+
+        const constraints  = {
+            audio: false,
+            video: {
+                width: 600,
+                height: 320
+            }
+        };
+
+        console.log("Here too");
+
+        async function init(){
+            try{
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                handleSuccess(stream);
+            }catch(e){
+                error_msg.innerHTML = `navigator.getUserMedia.error${e.toString()}`;
+            }
+        }
+
+        function handleSuccess(stream)
+        {
+            window.stream = stream;
+            video.srcObject = stream;
+        }
+
+        init();
+        var ctx = canvas.getContext('2d');
+
+        snap.addEventListener("click", function(){
+            console.log(video);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            var img = new Image();
+            img.src = canvas.toDataURL("/static/image/png");
+            console.log(img.src);
+            video.src = "";
+            window.stream.getTracks()[0].stop();
+        })
+    </script>
+	<!--================ End Video section =================-->
+    
+</body>
+
+</html>
