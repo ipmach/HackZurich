@@ -254,7 +254,7 @@ input, select, textarea {
 	}
 
 	h2 {
-		font-size: 1.25em;
+		font-size: 4em;
 	}
 
 	h3 {
@@ -1643,15 +1643,29 @@ input, select, textarea {
 				top: 0;
 				width: 100%;
 			}
-
+			#migros{
+				margin-top: 18px;
+				height: 22px;	
+			}
 			#main .thumb > h2 {
-				pointer-events: none;
-				bottom: 1.875em;
-				font-size: 0.8em;
-				left: 2.1875em;
-				margin: 0;
-				position: absolute;
-				z-index: 1;
+				    color: black;
+    pointer-events: none;
+    /* bottom: 1.875em; */
+    font-size: 3em;
+    left: 0.1875em;
+    margin: 0;
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+	z-index: 1;
+	color: black;
+    pointer-events: none;
+    /* bottom: 1.875em; */
+    font-size: 3em;
+    left: 0.1875em;
+    margin: 0;
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+    z-index: 1;
 			}
 
 			#main .thumb > p {

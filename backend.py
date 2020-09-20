@@ -20,6 +20,11 @@ def result(ingredients):
     ingredients=ingredients.split('&')
     return render_template('result.html', ingredients=ingredients)
 
+@app.route('/result2/<ingredients>')
+def result2(ingredients):
+    ingredients=ingredients.split('&')
+    return render_template('result.html', ingredients=ingredients)
+
 @app.route('/webcam')
 def webcam():
     return render_template('webcam.html')
@@ -37,7 +42,9 @@ def product_rating(product):
 @app.route('/ingredients/<product>')
 def ingredient(product):
     #get from data base
-    return json.dumps(l.return_data_pizza(product))
+    response=json.dumps(l.return_data_pizza(product))
+    print(response)
+    return response
 
 
 

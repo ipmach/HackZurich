@@ -16,6 +16,9 @@
             height: 340px;
             width: 340px;
             background: black;
+            margin: auto;
+            margin-top: 30px;
+            border-radius: 3px;
         }
     
         #loader {
@@ -44,21 +47,21 @@
     <section>
         <div></div>
 <div id="webcam-container"><div id="loader" ></div></div>
-<div id="label-container"></div>
+
 
         <!-- Canva Web API -->
-
+        <h2 style="text-align: center">Find Ingredients!</h2>
         <div class= "controller" style="display: flex;
         align-items: center;
         justify-content: center; margin-top: 3%;">
             <button id = "snap" class="main_btn">Capture</button>
         </div>
-
-        <canvas id = "canvas" width = "485" height = "273"></canvas>
-
+        <div id="label-container" style="display: none;" ></div>
+        <canvas id="myChart" width="400" height="400" style="display: none;"></canvas>
     </section>
 
     <!-- Java Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script async type="text/javascript">
@@ -104,7 +107,19 @@
         }
         
 
-       
+       var data = {
+    datasets: [{
+        data: [0.4, 0.2, 0.2, 0.2]
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        'Red',
+        'Yellow',
+        'Blue',
+        'Green'
+    ]
+};
         var capture_prediction
         // run the webcam image through the image model
         async function predict() {
@@ -117,6 +132,27 @@
                 const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
+                data = {
+    datasets: [{
+        data: [prediction[0], prediction[1], prediction[2], prediction[3]]
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        'Red',
+        'Yellow',
+        'Blue',
+        'Green'
+    ]
+};
+
+var ctx = document.getElementById('myChart')
+        var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data
+});
+
+
             }
         }
         init()
@@ -146,12 +182,15 @@
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            
             response = JSON.parse(this.responseText) 
-            return response.ingredients
+            
+            
         }
     };
-    xhttp.open("GET", url , true);
+    xhttp.open("GET", url , false);
     xhttp.send();
+    return response.ingredients
 }
 
 function getProductCO2(product){
@@ -183,12 +222,20 @@ function getProductCO2(product){
             if(pizza_name=='margherita'){pizza_name='Margarita'}
             
             /* var rating = getProductInfo(pizza_name, 'co2') */
-            var ingredients = getProductIngredients(pizza_name)
-        
+            let ingredients = getProductIngredients(pizza_name)
+            
+            setTimeout(function(){
+                var ingredient_string=ingredients.join('&')
+                console.log(ingredient_string)
+                window.location.replace("/result/Dough&"+ ingredient_string)
+            }, 2000)
+            
             /* webcam.stop(); */
             //video.src = "";
             //window.stream.getTracks()[0].stop();
         });
+        
+        
     </script>
     
 </body>
