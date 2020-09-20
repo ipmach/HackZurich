@@ -17,13 +17,20 @@ def own():
 
 @app.route('/result/<ingredients>')
 def result(ingredients):
-    ingredients=ingredients.split('&')
-    return render_template('result.html', ingredients=ingredients)
+    ingredients1=ingredients.split('&')[1:]
+    try:
+        co2=l.return_data_CO2(ingredients.split('&')[0])["recipe"]["rating"]
+    except:
+        co2="Not found"
+    return render_template('result.html', ingredients=ingredients1, co2=co2)
 
-@app.route('/result2/<ingredients>')
-def result2(ingredients):
-    ingredients=ingredients.split('&')
-    return render_template('result.html', ingredients=ingredients)
+@app.route('/data/<ingredient>')
+def data(ingredient):
+    ingredient=ingredient
+    nutrition= l.return_nutrients_ingredients(ingredient)
+    #print(co2)
+    print(nutrition)
+    return render_template('data.html', ingredient=ingredient, nutrition=nutrition)
 
 @app.route('/webcam')
 def webcam():
@@ -48,7 +55,7 @@ def ingredient(product):
 
 @app.route('/nutrients/<product>')
 def getNutrients(product):
-    return l.return_nutrients_ingredients(product)
+    return json.dumps(l.return_nutrients_ingredients(product))
 
 """ Back up functions in case Migros/ IBM fails """
 

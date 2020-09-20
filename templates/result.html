@@ -35,17 +35,26 @@
             <!-- Main -->
             <div id="main">
                 {% for i in ingredients %}
-
+                
                     <article style="position:relative" class="thumb">
 						
-						<a class="image" style="background-image: url(&quot;{{ "/static/images/" + i + ".jpg" }}&quot;); cursor: pointer; outline: 0px;">
+						<a  class="image" style="background-image: url(&quot;{{ "/static/images/" + i + ".jpg" }}&quot;); cursor: pointer; outline: 0px;">
 							<img src="{{ "/static/images/" + i + ".jpg" }}" alt="" style="display: none;">
 						</a>
-						<h2>{{ i }}</h2>
+						<h2 style="z-index: 9999;" onclick={console.log("hi");window.location.replace("{{"/data/"+i}}")}>{{i}}</h2>
 						<p>test</p>	
 
                     </article>
-				{% endfor %}
+                {% endfor %}
+                <article style="position:relative" class="thumb">
+						
+                    <a class="image" style="background-image: url(&quot;&quot;); cursor: pointer; outline: 0px;">
+                        <img src="" alt="" style="display: none;">
+                    </a>
+                    <h2>Eco-Rating: {{ co2 }}</h2>
+                    <p>test</p>	
+
+                </article>
 				
             </div>
         </div>
@@ -55,8 +64,16 @@
         <script src="/static/assets/js/jquery.poptrox.min.js"></script>
         <script src="/static/assets/js/browser.min.js"></script>
         <script src="/static/assets/js/breakpoints.min.js"></script>
-        <script src="/static/assets/js/util.js"></script>
-        <script src="/static/assets/js/main.js"></script>
+        <!--   <script src="/static/assets/js/util.js"></script>-->
+      <script src="/static/assets/js/main.js"></script> 
+<script>
 
+{% for i in ingredients %}
+     document.getElementsByClassName('thumb')[{{ingredients.index(i)}}].addEventListener('click', function(){
+        window.location.replace("{{"/data/"+ i}}")
+        })
+{% endfor %}
+
+</script>
     </body>
 </html>

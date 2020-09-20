@@ -13,8 +13,8 @@
     <style>
         #webcam-container{
             position: relative;
-            height: 340px;
-            width: 340px;
+            height: 280px;
+            width: 280px;
             background: black;
             margin: auto;
             margin-top: 30px;
@@ -26,11 +26,11 @@
         border: 16px solid #f3f3f3; /* Light grey */
         border-top: 16px solid rgba(96,18,17, 0.8); /* Blue */
         border-radius: 50%;
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
         animation: spin 4s linear infinite;
-        top: 60px;
-        left: 60px;
+        top: 40px;
+        left: 35px;
         }
     
         @keyframes spin {
@@ -87,7 +87,7 @@
     
             // Convenience function to setup a webcam
             const flip = true; // whether to flip the webcam
-            webcam = new tmImage.Webcam(340, 340, flip); // width, height, flip
+            webcam = new tmImage.Webcam(280, 280, flip); // width, height, flip
             await webcam.setup(); // request access to the webcam
             await webcam.play();
             window.requestAnimationFrame(loop);
@@ -227,7 +227,7 @@ function getProductCO2(product){
             setTimeout(function(){
                 var ingredient_string=ingredients.join('&')
                 console.log(ingredient_string)
-                window.location.replace("/result/Dough&"+ ingredient_string)
+                window.location.replace("/result/"+ pizza_name + "&Dough&"+ ingredient_string)
             }, 2000)
             
             /* webcam.stop(); */

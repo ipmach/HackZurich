@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>Ingredient Review</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <link rel="stylesheet" href="/static/assets/css/main.css"/>
+        <noscript><link rel="stylesheet" href="/static/assets/css/noscript.css"/></noscript>
+
+    </head>
+    <body 
+        class="is-preload" style="min-height: 3000px">
+
+        <!-- Wrapper -->
+        <div
+            id="wrapper">
+
+            <!-- Header -->
+            <header id="header">
+                <h1>
+                    <a href="index.html">
+                        <strong>Order
+                        </strong>
+                        with Home Delivery</a>
+                </h1>
+                <nav>
+                    <ul>
+                        <li><a href="#footer" class="icon solid fa-info-circle"><img id='migros' src="/static/images/migros.png" alt=""></a></li>
+                    </ul>
+                </nav>
+            </header>
+<style>
+table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+table tr {
+    border-bottom: 1px solid
+}
+table th, table td {
+    padding: 10px 20px;
+}
+table td span {
+    color: dimgrey;
+    display: none;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+}
+
+/* Simple CSS for flexbox table on mobile */
+@media(max-width: 800px) {
+    table thead {
+        left: -9999px;
+        position: absolute;
+        visibility: hidden;
+    }
+    table tr {
+        border-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+    }
+    table td {
+        border: 1px solid;
+        margin: 0 -1px -1px 0;
+        padding-top: 15px;
+        position: relative;
+        width: 50%;
+    }
+    table td span {
+        display: block;
+    }
+}
+</style>
+
+            <!-- Main -->
+            <div id="main">
+                    <article style="position:relative" class="thumb">
+						
+						<a class="image" style="background-image: url(&quot;{{ "/static/images/" + ingredient + ".jpg" }}&quot;); cursor: pointer; outline: 0px;">
+							<img src="{{ "/static/images/" + ingredient + ".jpg" }}" alt="" style="display: none;">
+						</a>
+						<h2>{{ingredient}}</h2>
+						<p>test</p>	
+                    </article>
+
+
+                    <article style="position:relative" class="thumb" style="min-height: 3000px">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in nutrition[' Nutritional'] %}
+                                <tr>
+                                    <td><span>Type of Food</span>{{i}}</td>
+                                    <td><span>Calories</span> {{nutrition[" Nutritional"][i][0]}} {{nutrition[" Nutritional"][i][1]}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+						{{nutrition}}
+						
+                    </article>
+				
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="/static/assets/js/jquery.min.js"></script>
+        <script src="/static/assets/js/jquery.poptrox.min.js"></script>
+        <script src="/static/assets/js/browser.min.js"></script>
+        <script src="/static/assets/js/breakpoints.min.js"></script>
+        <script src="/static/assets/js/util.js"></script>
+        <script src="/static/assets/js/main.js"></script>
+
+    </body>
+</html>
