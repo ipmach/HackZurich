@@ -10,8 +10,8 @@ class Logic():
         self.pm = Mongo_pizza()
         self.ec = Eaternity_class()
         self.ma = MigrosAPI()
-        self.user = "Peter"
-        self.kitchen = "Kitchen_Peter"
+        self.user = "Prasanna"
+        self.kitchen = "Kitchen_Prassana"
         print("Server ready")
 
     def conver_ingredient(self, mongo_dict, migros_dict):
@@ -63,3 +63,25 @@ class Logic():
                            -1,
                            self.user, self.kitchen, "Return ingredients")
         return {"ingredients": ingredients}
+
+    def return_nutrients_ingredients(self, ingredient):
+        """
+        Return data
+            ingredients: list data
+        """
+        aux_ingr = self.pm.get_ingredient(ingredient)
+        aux = {}
+        try:
+            aux[" Nutritional"] = self.ma.get_nutrients(
+                                  aux_ingr['name-ger'])
+        except IndexError as e:
+            aux[" Nutritional"] = "None"
+            self.pm.get_error("Error Migros API: " + str(e))
+        except  KeyError as e:
+            aux[" Nutritional"] = "None"
+            self.pm.get_error("Error Migros API: " + str(e))
+        self.pm.insert_log("",
+                           [ingredient],
+                           -1,
+                           self.user, self.kitchen, "Return nutrients")
+        return aux

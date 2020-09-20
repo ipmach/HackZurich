@@ -46,7 +46,9 @@ def ingredient(product):
     print(response)
     return response
 
-
+@app.route('/nutrients/<product>')
+def getNutrients(product):
+    return l.return_nutrients_ingredients(product)
 
 """ Back up functions in case Migros/ IBM fails """
 
